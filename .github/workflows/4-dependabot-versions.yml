@@ -20,7 +20,7 @@ env:
 jobs:
   find_exercise:
     name: Find Exercise Issue
-    uses: skills/exercise-toolkit/.github/workflows/find-exercise-issue.yml@v0.3.0
+    uses: skills/exercise-toolkit/.github/workflows/find-exercise-issue.yml@v0.7.3
     if: |
       github.run_number != 1
 
@@ -35,10 +35,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Get response templates
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: skills/exercise-toolkit
           path: exercise-toolkit
@@ -85,7 +85,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Create comment - add review content
         run: |
@@ -97,7 +97,7 @@ jobs:
   finish_exercise:
     name: Finish Exercise
     needs: [find_exercise, post_review_content]
-    uses: skills/exercise-toolkit/.github/workflows/finish-exercise.yml@v0.3.0
+    uses: skills/exercise-toolkit/.github/workflows/finish-exercise.yml@v0.7.3
     with:
       issue-url: ${{ needs.find_exercise.outputs.issue-url }}
 
@@ -108,7 +108,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Disable current workflow
         run: gh workflow disable "${{github.workflow}}"
         env:
